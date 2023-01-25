@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +18,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
-        $user = Auth::user();
+        // $userId = Auth::id();
+        // $user = Auth::user();
 
+        // $data = [
+        //     'userId' => $userId,
+        //     'user' => $user
+        // ];
         $data = [
-            'userId' => $userId,
-            'user' => $user
+            'posts' => Post::paginate(10)
         ];
 
         return view('admin.post.index', $data);
@@ -35,7 +40,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post.create');
     }
 
     /**
@@ -46,7 +51,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newPost = new Post();
+        $newPost->fill($data);
+        $newPost->save();
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -57,7 +68,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $elem = Post::findOrFail($id);
+        // dd($elem);
+        return view('admin.post.show', compact('elem'));
     }
 
     /**
@@ -68,7 +81,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $elem = Post::findOrFail($id);
+
+        return view('admin.post.edit', compact('elem'));
     }
 
     /**
@@ -80,7 +95,20 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $post = Post::findOrFail($id);
+        $request->validate(
+            [
+                'name' => 'required|max:50'
+            ],
+            [
+                'name.required' => 'Attenzione il campo name è obbligatorio',
+                'name.max' => 'Attenzione il campo non deve superare i 50 caratteri'
+            ]
+        );
+        $post->update($data);
+
+        return redirect()->route('admin.posts.show', $post->id)->with('success', "Hai modificato con successo: $post->name");
     }
 
     /**
@@ -91,6 +119,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $singlePost = Post::findOrFail($id);
+        $singlePost->delete();
+        return redirect()->route('admin.posts.index');
     }
 }

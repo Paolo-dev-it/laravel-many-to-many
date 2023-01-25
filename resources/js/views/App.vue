@@ -1,15 +1,20 @@
 <template>
     <div>
-        <h1>Work in progress Vue</h1>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <router-link :to="{ name: 'admin.posts.index' }"
+                    >Lista Post</router-link
+                >
+            </li>
+        </ul>
     </div>
 </template>
-
 
 <script>
 export default {
     name: "App",
-    components:{
+    components: {
         //qui inseriremo i componenti
-    }
-}
+    },
+};
 </script>

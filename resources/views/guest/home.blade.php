@@ -10,7 +10,7 @@
 <body>
     {{-- Inseriamo Vue --}}
     <div id="root">
-        <h1>ciao</h1>
+
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
