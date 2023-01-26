@@ -21,6 +21,17 @@
             <label class="form-label" for="">Descrizione</label>
             <textarea class="form-control" type="text" name="description"></textarea>
         </div>
+        <div class="my-3">
+            <label for="">Socials</label>
+            <select name="user_social" id="">
+                <option value="">Seleziona il tuo social preferito</option>
+                @foreach ($socials as $social)
+                    <option value="{{ $social->id }}">
+                        {{ $social->user }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
         <button class="btn btn-success">Crea post</button>
     </form>

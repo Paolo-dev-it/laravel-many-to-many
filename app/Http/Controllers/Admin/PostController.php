@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ class PostController extends Controller
         //     'user' => $user
         // ];
         $data = [
-            'posts' => Post::paginate(10)
+            'posts' => Post::with('social')->paginate(10)
         ];
 
         return view('admin.post.index', $data);
@@ -40,7 +41,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        $data = [
+            'socials' => Category::All()
+        ];
+
+        return view('admin.post.create', $data);
     }
 
     /**

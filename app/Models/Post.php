@@ -12,8 +12,13 @@ class Post extends Model
         'name',
         'date',
         'description',
+        'user_social'
 
     ];
+
+    public function social(){
+        return $this->belongsTo('App\Models\Category');
+    }
 
 
 }

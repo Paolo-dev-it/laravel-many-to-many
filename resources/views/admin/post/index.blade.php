@@ -36,6 +36,11 @@
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </form></a></td>
+            <td>
+                @if ($posts->user_social)
+                    {{$posts->user_social['user_social']}}
+                @endif
+            </td>
         </tr>
         @endforeach
 
