@@ -17,6 +17,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Data</th>
             <th scope="col">Descrizione</th>
+            <th scope="col">Social Preferito</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,11 @@
             <td>{{$elem->name}}</td>
             <td>{{$elem->date}}</td>
             <td>{{$elem->description}}</td>
+            <td>
+                @if ( $elem->user_social )
+                    <p>{{$elem->user_social['user']}}</p>
+                @endif
+            </td>
             <td><a href="{{ route('admin.posts.show', $elem->id) }}"><i class="fa-solid fa-eye"></i></a></td>
             <td><a href="{{ route('admin.posts.edit', $elem->id) }}"><i class="fa-solid fa-pencil"></i></a>  </td>
             <td>
@@ -36,11 +42,7 @@
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </form></a></td>
-            <td>
-                @if ($posts->user_social)
-                    {{$posts->user_social['user_social']}}
-                @endif
-            </td>
+
         </tr>
         @endforeach
 

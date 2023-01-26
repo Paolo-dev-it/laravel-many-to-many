@@ -21,7 +21,7 @@ class CategorySeeder extends Seeder
 
         foreach ($socials as $social) {
             $newSocial = new Category();
-            $newSocial->user= $social;
+            $newSocial->user = $social;
             $newSocial->save();
         }
     }

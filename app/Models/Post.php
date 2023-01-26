@@ -19,6 +19,5 @@ class Post extends Model
     public function social(){
         return $this->belongsTo('App\Models\Category');
     }
-
-
 }
+
