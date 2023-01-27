@@ -5,31 +5,39 @@
 @endsection
 
 @section('content')
-    <div>
-        <h1>{{ $elem->name }}</h1>
-    </div>
-    <div>
-        <p>
-            {{ $elem->date }}
-        </p>
-    </div>
-    {{-- @if (session('success'))
+    <div class="container text-center">
+        <div>
+            <h1>{{ $elem->name }}</h1>
+        </div>
+
+        {{-- @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif --}}
 
-    <div>
-        <p>
-            {{ $elem->description }}
-        </p>
-    </div>
+        <div>
+            <h3>
+                <div>Descrizione:</div>
+                {{ $elem->description }}
+            </h3>
+        </div>
 
-    <div>
-        <p>
-            {{ $elem->title }}
-        </p>
-    </div>
+        <div>
+            <p>
+            <div>Data:</div>
+            {{ $elem->date }}
+            </p>
+        </div>
 
-    <a href="{{ route('admin.posts.index') }}"><i class="fa-solid fa-left-long"></i></a>
+        <div>
+            <p>
+                {{ $elem->title }}
+            </p>
+        </div>
+        <button class="btn btn-primary">
+            <a href="{{ route('admin.posts.index') }}"><i class="fa-solid fa-left-long text-white"></i></a>
+        </button>
+
+    </div>
 @endsection

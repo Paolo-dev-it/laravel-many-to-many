@@ -5,7 +5,7 @@
         <h1>Crea un Post</h1>
     </div>
 
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+    <form class="container" action="{{ route('admin.posts.store') }}" method="POST">
         @csrf
         <div>
             <label class="form-label" for="">Nome</label>
