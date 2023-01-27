@@ -28,7 +28,7 @@ class PostController extends Controller
         //     'user' => $user
         // ];
         $data = [
-            'posts' => Post::with('category')->paginate(10)
+            'posts' => Post::with('category', 'tags')->paginate(10)
         ];
 
         return view('admin.post.index', $data);
@@ -97,8 +97,9 @@ class PostController extends Controller
     {
         $elem = Post::findOrFail($id);
         $categories = Category::All();
+        $tags = Tag::All();
 
-        return view('admin.post.edit', compact('elem', 'categories'));
+        return view('admin.post.edit', compact('elem', 'categories', 'tags'));
     }
 
     /**

@@ -33,6 +33,15 @@
                             <p>{{ $elem->category['title'] }}</p>
                         @endif
                     </td>
+                    <td>
+                        @foreach ($elem->tags as $singoloTag)
+                            <ul>
+                                <li>
+                                    {{ $singoloTag->name }}
+                                </li>
+                            </ul>
+                        @endforeach
+                    </td>
                     <td><a href="{{ route('admin.posts.show', $elem->id) }}"><i class="fa-solid fa-eye"></i></a></td>
                     <td><a href="{{ route('admin.posts.edit', $elem->id) }}"><i class="fa-solid fa-pencil"></i></a> </td>
                     <td>
