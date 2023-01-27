@@ -27,7 +27,7 @@ class PostController extends Controller
         //     'user' => $user
         // ];
         $data = [
-            'posts' => Post::with('social')->paginate(10)
+            'posts' => Post::with('category')->paginate(10)
         ];
 
         return view('admin.post.index', $data);
@@ -42,7 +42,7 @@ class PostController extends Controller
     public function create()
     {
         $data = [
-            'socials' => Category::All()
+            'categories' => Category::All()
         ];
 
         return view('admin.post.create', $data);
@@ -57,6 +57,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        //dd($data);
 
         $newPost = new Post();
         $newPost->fill($data);
@@ -88,8 +89,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $elem = Post::findOrFail($id);
+        $categories = Category::All();
 
-        return view('admin.post.edit', compact('elem'));
+        return view('admin.post.edit', compact('elem', 'categories'));
     }
 
     /**
@@ -103,15 +105,15 @@ class PostController extends Controller
     {
         $data = $request->all();
         $post = Post::findOrFail($id);
-        $request->validate(
-            [
-                'name' => 'required|max:50'
-            ],
-            [
-                'name.required' => 'Attenzione il campo name è obbligatorio',
-                'name.max' => 'Attenzione il campo non deve superare i 50 caratteri'
-            ]
-        );
+        // $request->validate(
+            // [
+            //     'name' => 'required|max:50'
+            // ],
+            // [
+            //     'name.required' => 'Attenzione il campo name è obbligatorio',
+            //     'name.max' => 'Attenzione il campo non deve superare i 50 caratteri'
+            // ]
+        // );
         $post->update($data);
 
         return redirect()->route('admin.posts.show', $post->id)->with('success', "Hai modificato con successo: $post->name");

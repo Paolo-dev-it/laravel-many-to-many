@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public $table = 'Post';
+    public $table = 'Posts';
 
     protected $fillable = [
         'name',
         'date',
         'description',
-        'user_social'
+        'category_id'
 
     ];
 
-    public function social(){
+    public function category(){
         return $this->belongsTo('App\Models\Category');
     }
 }
+
 

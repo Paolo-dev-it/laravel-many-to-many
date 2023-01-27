@@ -28,8 +28,8 @@
             <td>{{$elem->date}}</td>
             <td>{{$elem->description}}</td>
             <td>
-                @if ( $elem->user_social )
-                    <p>{{$elem->user_social['user']}}</p>
+                @if ( $elem->category )
+                    <p>{{$elem->category['title']}}</p>
                 @endif
             </td>
             <td><a href="{{ route('admin.posts.show', $elem->id) }}"><i class="fa-solid fa-eye"></i></a></td>

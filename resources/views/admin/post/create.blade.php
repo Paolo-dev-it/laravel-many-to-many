@@ -23,11 +23,11 @@
         </div>
         <div class="my-3">
             <label for="">Socials</label>
-            <select name="user_social" id="">
+            <select name="category_id" id="">
                 <option value="">Seleziona il tuo social preferito</option>
-                @foreach ($socials as $social)
-                    <option value="{{ $social->id }}">
-                        {{ $social->user }}
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">
+                        {{ $category->title }}
                     </option>
                 @endforeach
             </select>

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
@@ -12,17 +12,19 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $socials = [
-            'Instagram',
-            'Facebook',
-            'Twitter',
-            'Telegram',
+        $categories = [
+            'antipasti',
+            'primi',
+            'secondi',
+            'contorni',
+            'dolci'
         ];
 
-        foreach ($socials as $social) {
-            $newSocial = new Category();
-            $newSocial->user = $social;
-            $newSocial->save();
+        foreach ($categories as $category){
+            $newCategory = new Category();
+            $newCategory->title = $category;
+            $newCategory->save();
         }
+
     }
 }

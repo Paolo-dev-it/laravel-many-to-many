@@ -13,9 +13,9 @@ class UpdateAddForeignCategoryPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_social')->nullable();
-            $table->foreign('user_social')->references('id')->on('categories')->onDelete('set null');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 
@@ -26,9 +26,9 @@ class UpdateAddForeignCategoryPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->dropForeign('posts_user_social_foreign');
-            $table->dropColumn('user_social');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign('posts_category_id_foreign');
+            $table->dropColumn('category_id');
         });
     }
 }

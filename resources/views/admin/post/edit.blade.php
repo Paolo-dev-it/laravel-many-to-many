@@ -32,10 +32,10 @@ Cos'e' non ti piace il post?
             <label for="">Socials</label>
             <select name="user_social" id="">
                 <option value="">Seleziona il tuo social preferito</option>
-                @foreach ($socials as $social)
-                    <option value="{{ $social->id }}"
-                        {{ $social->id = old('user_social', $social->user_social) ? 'selected' : '' }}>
-                        {{ $social->user }}
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ $category->id == old('category_id', $category->category_id) ? 'selected' : '' }}>
+                        {{ $category->title }}
                     </option>
                 @endforeach
             </select>
