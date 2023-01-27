@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -40,11 +41,14 @@ class PostController extends Controller
      */
     public function create()
     {
-        $data = [
-            'categories' => Category::All()
-        ];
+        // $data = [
+        //     'categories' => Category::All()
+        // ];
 
-        return view('admin.post.create', $data);
+        $categories = Category::All();
+        $tags = Tag::All();
+
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -62,6 +66,10 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->save();
         //dd($data);
+
+        if (array_key_exists('tags', $data)) {
+            $newPost->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index');
     }
@@ -104,20 +112,17 @@ class PostController extends Controller
     {
         $data = $request->all();
         $post = Post::findOrFail($id);
-        // $category = Category::findOrFail($id);
-        // $request->validate(
-        // [
-        //     'name' => 'required|max:50'
-        // ],
-        // [
-        //     'name.required' => 'Attenzione il campo name è obbligatorio',
-        //     'name.max' => 'Attenzione il campo non deve superare i 50 caratteri'
-        // ]
-        // );
-        $post->update($data);
-        // $category->update($data);
 
-        return redirect()->route('admin.posts.show', $post->id)->with('success', "Hai modificato con successo: $post->name");
+        $post->update($data);
+
+        if (array_key_exists('tags', $data)) {
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->sync([]);
+        }
+
+
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
@@ -129,6 +134,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $singlePost = Post::findOrFail($id);
+        $singlePost->tags()->sync([]);
         $singlePost->delete();
         return redirect()->route('admin.posts.index');
     }

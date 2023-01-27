@@ -18,6 +18,7 @@
                 <th scope="col">Data</th>
                 <th scope="col">Descrizione</th>
                 <th scope="col">Portata preferita</th>
+                <th scope="col">Cibo preferito</th>
             </tr>
         </thead>
         <tbody>
