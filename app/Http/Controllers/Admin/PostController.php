@@ -31,7 +31,6 @@ class PostController extends Controller
         ];
 
         return view('admin.post.index', $data);
-
     }
 
     /**
@@ -105,16 +104,18 @@ class PostController extends Controller
     {
         $data = $request->all();
         $post = Post::findOrFail($id);
+        // $category = Category::findOrFail($id);
         // $request->validate(
-            // [
-            //     'name' => 'required|max:50'
-            // ],
-            // [
-            //     'name.required' => 'Attenzione il campo name è obbligatorio',
-            //     'name.max' => 'Attenzione il campo non deve superare i 50 caratteri'
-            // ]
+        // [
+        //     'name' => 'required|max:50'
+        // ],
+        // [
+        //     'name.required' => 'Attenzione il campo name è obbligatorio',
+        //     'name.max' => 'Attenzione il campo non deve superare i 50 caratteri'
+        // ]
         // );
         $post->update($data);
+        // $category->update($data);
 
         return redirect()->route('admin.posts.show', $post->id)->with('success', "Hai modificato con successo: $post->name");
     }
