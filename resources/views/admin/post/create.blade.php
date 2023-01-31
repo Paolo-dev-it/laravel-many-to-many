@@ -5,7 +5,7 @@
         <h1>Crea un Post</h1>
     </div>
 
-    <form class="container" action="{{ route('admin.posts.store') }}" method="POST">
+    <form class="container" action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
             <label class="form-label" for="">Nome</label>
@@ -43,6 +43,11 @@
                 </label>
             @endforeach
 
+        </div>
+
+        <div class="my-3">
+            <label for="">Aggiungi Cover</label>
+            <input type="file" name="image" class="form-control-file">
         </div>
 
         <button class="btn btn-success">Crea post</button>
