@@ -35,6 +35,11 @@
                 {{ $elem->title }}
             </p>
         </div>
+
+        <div>
+            <img src="{{ asset("storage/$elem->cover") }}" alt="">
+        </div>
+
         <button class="btn btn-primary">
             <a href="{{ route('admin.posts.index') }}"><i class="fa-solid fa-left-long text-white"></i></a>
         </button>
